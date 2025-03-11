@@ -1,0 +1,20 @@
+the question asks you to check if a string s is like "THIS" or "this" or "This" if its in any other form return false else true
+so we created a bool function check with arguments consisting of string, a start and an end.
+
+class Solution {
+public:
+    bool check(string s, char start, char end){
+        for(char ch : s){
+            if(ch<start || ch>end) // for eg if 'A' is ch and start = 'a' and end = 'z' since A is bigger than z (ASCII VALUE) it will return false.
+            return false;
+        }
+        return true;
+    }
+
+    bool detectCapitalUse(string word) {
+        if(check(word,'A','Z') || check(word,'a','z') || check(word.substr(1),'a','z'))
+        return true;
+        else
+        return false;
+    }
+};
