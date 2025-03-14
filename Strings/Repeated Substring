@@ -1,3 +1,8 @@
+https://leetcode.com/problems/repeated-substring-pattern/
+
+this question asks us to return a bool if we can make a substring of a given substring 's' such that if we append that 
+substring multiple times it will give us the same string as 's'.
+
 class Solution {
 public:
     bool repeatedSubstringPattern(string s) {
