@@ -1,3 +1,5 @@
+https://leetcode.com/problems/detect-capital/
+
 the question asks you to check if a string s is like "THIS" or "this" or "This" if its in any other form return false else true
 so we created a bool function check with arguments consisting of string, a start and an end.
 
