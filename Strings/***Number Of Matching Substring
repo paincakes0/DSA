@@ -5,7 +5,7 @@ this question asks us to return the number of sub seuqences in an array 'words' 
 class Solution {
 public:
     bool isSubsequence(string s1, string s2, int m, int n){
-		//This function behaves simliar to the one in previous approach
+		//This function behaves simliar to the one in is subsequence approach
         int j = 0;
         for(int i = 0; i < m && j < n; i++){
             if(s1[i] == s2[j]) j++;
