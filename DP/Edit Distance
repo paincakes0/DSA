@@ -1,0 +1,57 @@
+#top-down
+
+class Solution {
+public:
+    int m,n,t[501][501];
+
+    int solve(string &s1, string &s2, int i, int j){
+        if(i==m) return n-j; //if length of s1 is exhausted number of insert operations
+        if(j==n) return m-i; // if length of s2 is exhausted number of delete operations
+
+        if(t[i][j] != -1) return t[i][j];
+
+        if(s1[i] == s2[j]) return solve(s1,s2,i+1,j+1);
+
+        else{
+            int ins = 1 + solve(s1,s2,i+1,j);
+            int del = 1 + solve(s1,s2,i,j+1);
+            int upd = 1 + solve(s1,s2,i+1,j+1);
+
+            return t[i][j] = min({ins,del,upd});//{} allows min operator to compute the minimum of more than 2 values
+        }
+        return 0;
+    }
+    int minDistance(string s1, string s2) {
+        m = s1.length();
+        n = s2.length();
+        memset(t,-1,sizeof(t));
+
+        return solve(s1,s2,0,0);
+    }
+};
+
+#bottom-up
+
+class Solution {
+public:
+    int minDistance(string s1, string s2) {
+        int m = s1.length();
+        int n = s2.length();
+
+        vector<vector<int>>t(m+1,vector<int>(n+1));
+
+        for(int i = 0; i<=m; i++){
+            for(int j = 0; j<=n; j++){
+                if(i == 0 || j == 0) // if the length of any of the 1 string is 0
+                     t[i][j] = i+j; // return the total length
+                else if(s1[i-1] == s2[j-1]){
+                    t[i][j] = t[i-1][j-1];//if the character is same then the number of operators will be same as the previous cycle
+                }
+                else{
+                    t[i][j] = 1 + min({t[i-1][j], t[i][j-1], t[i-1][j-1]});//{delete,insert,update}
+                }
+            }
+        }
+        return t[m][n];
+    }
+};
