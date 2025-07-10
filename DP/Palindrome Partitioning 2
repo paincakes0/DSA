@@ -1,0 +1,43 @@
+#this question really was super hard for me to concentrate for just cause of the fact that there was so much explanation whereas the code was pretty simple
+
+#top-down -> led to TLE
+
+#bottom-up
+class Solution{
+public:
+int minCut(string s){
+  int n = s.length();
+  vector<vector<int>> t(n,vector<int>(n));
+  for(int i = 0; i<n; i++){
+    t[i][i] = true;
+  }
+  for(int l = 2; l<=n; l++){
+    for(int i = 0; i<n-l+1; i++){
+      int j = i + l - 1;
+      if(s[i] == s[j]){
+        if(l == 2){
+          t[i][j] = true;
+        }
+        else{
+          t[i][j] = t[i+1][j-1];
+        }
+      }
+        else 
+          t[i][j] = false;
+    }
+  }
+  vector<int>dp(n,INT_MAX);
+  for(int i = 0; i<n; i++){
+    if(t[0][i]) 
+      dp[i] = 0;
+    else{
+      for(int k =0; k<i ; k++){
+          if(t[k+1][i] && 1+dp[k] < dp[i]){
+              dp[i] = 1 + dp[k];
+          }
+      }
+    }
+}
+return dp[n-1];
+}
+};
